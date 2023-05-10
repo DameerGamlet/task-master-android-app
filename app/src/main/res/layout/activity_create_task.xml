@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nord_0"
+    android:paddingHorizontal="16dp"
+    tools:context=".CreateTaskActivity"
+    tools:ignore="RtlSymmetry">
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/back"
+        android:textColor="@color/nord_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/task_name_edittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:background="@drawable/nord_edittext"
+        android:hint="@string/edit_task_name"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textColor="@color/nord_6"
+        android:textColorHint="@color/nord_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/back" />
+
+    <EditText
+        android:id="@+id/task_description_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:autofillHints="Описание задачи"
+        android:background="@drawable/nord_edittext"
+        android:hint="@string/edit_task_description"
+        android:inputType="text"
+        android:lines="3"
+        android:padding="8dp"
+        android:textColor="@color/nord_6"
+        android:textColorHint="@color/nord_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/task_name_edittext" />
+
+    <LinearLayout
+        android:id="@+id/start_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:weightSum="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/task_description_edittext"
+        tools:ignore="NotSibling"
+        tools:layout_editor_absoluteX="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="0.8">
+
+            <TextView
+                android:id="@+id/start_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="@string/start_data_text"
+                android:textColor="@color/nord_6"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/start_date_text_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text=""
+                android:textColor="@color/nord_6"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/start_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="@string/choose_date"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/end_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:weightSum="1.0"
+        app:layout_constraintTop_toBottomOf="@id/start_data_layout"
+        tools:layout_editor_absoluteX="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="0.8">
+
+            <TextView
+                android:id="@+id/end_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/end_data_text"
+                android:textColor="@color/nord_6"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/end_date_text_current"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/nord_6"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/end_date_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="@string/choose_date" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tags_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/edit_tags_text"
+        android:textColor="@color/nord_6"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/end_data_layout" />
+
+    <MultiAutoCompleteTextView
+        android:id="@+id/tags_multiautocompletetextview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/nord_edittext"
+        android:hint="@string/choose_tags"
+        android:padding="8dp"
+        android:textColor="@color/nord_6"
+        android:textColorHint="@color/nord_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tags_textview" />
+
+    <TextView
+        android:id="@+id/notification_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/receive_notifications"
+        android:textColor="@color/nord_6"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tags_multiautocompletetextview" />
+
+    <LinearLayout
+        android:id="@+id/checkbox_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal"
+        android:weightSum="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/notification_textview"
+        tools:ignore="NotSibling"
+        tools:layout_editor_absoluteX="16dp">
+
+        <CheckBox
+            android:id="@+id/daily_notification_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/on"
+            android:textColor="@color/nord_6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notification_textview" />
+
+        <Button
+            android:id="@+id/time_date"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:gravity="center"
+            android:text="@string/choose_time"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:id="@+id/selected_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Выбранное время: "
+            android:gravity="start"
+            android:textColor="@color/nord_6"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/time_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="start"
+            android:textColor="@color/nord_6"
+            android:textSize="18sp"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/nord_14"
+        android:text="@string/add"
+        android:textColor="@color/nord_6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parent_layout" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/nord_3"
+        android:text="@string/clear"
+        android:textColor="@color/nord_6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+        app:layout_constraintVertical_bias="0.228" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
