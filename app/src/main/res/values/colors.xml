@@ -23,4 +23,7 @@
     <color name="nord_13">#EBCB8B</color>
     <color name="nord_14">#A3BE8C</color>
     <color name="nord_15">#B48EAD</color>
+
+    <color name="light_gray">#CCCCCC</color>
+    <color name="dark_gray">#555555</color>
 </resources>

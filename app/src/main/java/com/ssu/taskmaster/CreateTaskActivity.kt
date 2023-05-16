@@ -6,33 +6,55 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.ssu.taskmaster.databinding.ActivityCreateTaskBinding
+import com.ssu.taskmaster.db.TaskHelperDb
+import com.ssu.taskmaster.models.Task
 import java.util.*
 
 
 class CreateTaskActivity : AppCompatActivity() {
     private lateinit var startDateTextView: TextView
     private lateinit var endDateTextView: TextView
-    private lateinit var startDateButton: Button
-    private lateinit var endDateButton: Button
 
     private lateinit var time_date: TextView
-    private lateinit var back: Button
+
+    private lateinit var binding: ActivityCreateTaskBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_task)
+        binding = ActivityCreateTaskBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+
+        val taskDb = TaskHelperDb.getConnect(this);
 
         init()
 
-        back.setOnClickListener {
+        binding.saveTask.setOnClickListener{
+            val task = Task(
+                null,
+                binding.taskName.text.toString(),
+                binding.taskDescription.text.toString(),
+                binding.startDateTextCurrent.text.toString(),
+                binding.endDateTextCurrent.text.toString(),
+                binding.dailyNotificationCheckbox.isChecked,
+                binding.timeTextView.text.toString()
+            );
+
+            Thread {
+                taskDb.getDao().insertTask(task)
+            }.start()
+        }
+
+        binding.back.setOnClickListener {
             finish()
         }
 
-        startDateButton.setOnClickListener {
+        binding.startDateButton.setOnClickListener {
             showDatePickerDialog(startDateTextView)
         }
 
-        endDateButton.setOnClickListener {
+        binding.endDateButton.setOnClickListener {
             showDatePickerDialog(endDateTextView)
         }
 
@@ -44,13 +66,8 @@ class CreateTaskActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        back = findViewById(R.id.back)
-
         startDateTextView = findViewById(R.id.start_date_text_current)
         endDateTextView = findViewById(R.id.end_date_text_current)
-
-        startDateButton = findViewById(R.id.start_date_button)
-        endDateButton = findViewById(R.id.end_date_button)
 
         time_date = findViewById(R.id.time_text_view)
     }

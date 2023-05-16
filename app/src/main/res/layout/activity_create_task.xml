@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/task_name_edittext"
+        android:id="@+id/task_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/back" />
 
     <EditText
-        android:id="@+id/task_description_edittext"
+        android:id="@+id/task_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -52,7 +52,7 @@
         android:textColorHint="@color/nord_4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/task_name_edittext" />
+        app:layout_constraintTop_toBottomOf="@id/task_name" />
 
     <LinearLayout
         android:id="@+id/start_data_layout"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:weightSum="1.0"
-        app:layout_constraintTop_toBottomOf="@+id/task_description_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/task_description"
         tools:ignore="NotSibling"
         tools:layout_editor_absoluteX="16dp">
 
@@ -219,26 +219,24 @@
             android:id="@+id/selected_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Выбранное время: "
             android:gravity="start"
+            android:text="Выбранное время: "
             android:textColor="@color/nord_6"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
             android:gravity="start"
+            android:text=""
             android:textColor="@color/nord_6"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnAdd"
+        android:id="@+id/saveTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -259,7 +257,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+        app:layout_constraintTop_toBottomOf="@+id/saveTask"
         app:layout_constraintVertical_bias="0.228" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

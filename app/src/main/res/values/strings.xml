@@ -14,7 +14,7 @@
     <string name="choose_tags">Выберите теги</string>
     <string name="receive_notifications">Ежедневное уведомление:</string>
     <string name="choose_time">Выберите время</string>
-    <string name="add">Добавить</string>
+    <string name="add">Сохранить</string>
     <string name="clear">Очистить</string>
     <string name="on">Включить</string>
 </resources>

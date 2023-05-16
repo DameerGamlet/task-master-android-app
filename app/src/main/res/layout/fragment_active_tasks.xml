@@ -19,6 +19,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="Список активных задач" />
+        android:text="Список активных задач"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/activity_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Список активных задач"
+        android:textSize="18dp" />
 
 </LinearLayout>
