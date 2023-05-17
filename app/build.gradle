@@ -6,14 +6,12 @@ plugins {
 
 ext {
     sqlite_version = '2.3.1'
-    core_ktx_version = '1.10.0'
     appcompat_version = '1.6.1'
     material_version = '1.9.0'
     constraintlayout_version = '2.1.4'
     junit_version = '4.13.2'
     junit_ext_version = '1.1.5'
     espresso_version = '3.5.1'
-    hibernate_version = '6.2.2.Final'
 }
 
 android {
@@ -36,21 +34,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
+
     buildFeatures {
         viewBinding true
+    }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
     }
 }
 
 dependencies {
     // Core
-    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.core:core-ktx:1.10.1"
     implementation 'androidx.room:room-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     kapt "androidx.room:room-compiler:2.5.1"

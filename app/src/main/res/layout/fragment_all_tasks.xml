@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="10dp">
 
     <Button
         android:id="@+id/add_task_button"
@@ -13,18 +13,9 @@
         android:layout_marginTop="16dp"
         android:text="@string/add_new_task" />
 
-    <TextView
-        android:id="@+id/text_view_below_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textSize="24dp"
-        android:text="Список всех задач" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
 </LinearLayout>

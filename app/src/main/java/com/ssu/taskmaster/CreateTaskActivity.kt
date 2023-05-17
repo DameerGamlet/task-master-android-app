@@ -1,49 +1,78 @@
 package com.ssu.taskmaster
 
+//noinspection SuspiciousImport
+import android.R
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.widget.Button
+import android.widget.ArrayAdapter
+import android.widget.MultiAutoCompleteTextView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ssu.taskmaster.databinding.ActivityCreateTaskBinding
 import com.ssu.taskmaster.db.TaskHelperDb
 import com.ssu.taskmaster.models.Task
-import java.util.*
-
+import java.util.Calendar
 
 class CreateTaskActivity : AppCompatActivity() {
-    private lateinit var startDateTextView: TextView
-    private lateinit var endDateTextView: TextView
-
-    private lateinit var time_date: TextView
 
     private lateinit var binding: ActivityCreateTaskBinding
+
+    private val tagList = "lichnoe,rabota,ucheba"
+        .replace(" ", "")
+        .split(",")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateTaskBinding.inflate(layoutInflater)
 
+        val adapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, tagList)
+
+        binding.tags.setAdapter(adapter)
+
+        binding.tags.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+
         setContentView(binding.root)
 
         val taskDb = TaskHelperDb.getConnect(this);
 
-        init()
+        binding.saveTask.setOnClickListener {
+            val taskName = binding.taskName.text.toString()
+            val taskDescription = binding.taskDescription.text.toString()
+            val startDate = binding.startDateTextCurrent.text.toString()
+            val endDate = binding.endDateTextCurrent.text.toString()
+            val dailyNotification = binding.dailyNotificationCheckbox.isChecked
+            val time = binding.timeDate.text.toString()
 
-        binding.saveTask.setOnClickListener{
-            val task = Task(
-                null,
-                binding.taskName.text.toString(),
-                binding.taskDescription.text.toString(),
-                binding.startDateTextCurrent.text.toString(),
-                binding.endDateTextCurrent.text.toString(),
-                binding.dailyNotificationCheckbox.isChecked,
-                binding.timeTextView.text.toString()
-            );
+            if (taskName.isNotEmpty()) {
+                val task = Task(
+                    null,
+                    taskName,
+                    taskDescription,
+                    startDate,
+                    endDate,
+                    dailyNotification,
+                    time
+                )
 
-            Thread {
-                taskDb.getDao().insertTask(task)
-            }.start()
+                Thread {
+                    taskDb.getDao().insertTask(task)
+                }.start()
+
+                Toast.makeText(this, "Запись удачно создана!", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Пожалуйста заполните все необходымые данные!",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        binding.btnClear.setOnClickListener {
+            clearAll()
         }
 
         binding.back.setOnClickListener {
@@ -51,25 +80,25 @@ class CreateTaskActivity : AppCompatActivity() {
         }
 
         binding.startDateButton.setOnClickListener {
-            showDatePickerDialog(startDateTextView)
+            showDatePickerDialog(binding.startDateTextCurrent)
         }
 
         binding.endDateButton.setOnClickListener {
-            showDatePickerDialog(endDateTextView)
+            showDatePickerDialog(binding.endDateTextCurrent)
         }
 
-        val timeDateButton = findViewById<Button>(R.id.time_date)
-
-        timeDateButton.setOnClickListener {
+        binding.timeDate.setOnClickListener {
             showTimePickerDialog()
         }
     }
 
-    private fun init() {
-        startDateTextView = findViewById(R.id.start_date_text_current)
-        endDateTextView = findViewById(R.id.end_date_text_current)
-
-        time_date = findViewById(R.id.time_text_view)
+    private fun clearAll() {
+        binding.taskName.text = null
+        binding.taskDescription.text = null
+        binding.startDateTextCurrent.text = null
+        binding.endDateTextCurrent.text = null
+        binding.dailyNotificationCheckbox.isChecked = false
+        binding.timeDate.text = null
     }
 
     private fun showTimePickerDialog() {
@@ -77,7 +106,7 @@ class CreateTaskActivity : AppCompatActivity() {
             this,
             { _, hourOfDay, minute ->
                 val time = String.format("%02d:%02d", hourOfDay, minute)
-                time_date.text = time
+                binding.timeDate.text = time
             },
             0, 0, true
         )
@@ -90,10 +119,13 @@ class CreateTaskActivity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(this, { view, year, month, dayOfMonth ->
-            val date = "$dayOfMonth/${month + 1}/$year"
-            textView.text = date
-        }, year, month, dayOfMonth)
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { view, year, month, dayOfMonth ->
+                val date = "$dayOfMonth/${month + 1}/$year"
+                textView.text = date
+            }, year, month, dayOfMonth
+        )
 
         datePickerDialog.show()
     }

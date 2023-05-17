@@ -17,4 +17,7 @@
     <string name="add">Сохранить</string>
     <string name="clear">Очистить</string>
     <string name="on">Включить</string>
+    <string name="temp_date">10.10.2011</string>
+    <string name="defiz">-</string>
+    <string name="empty_mes">ПУСТОЕ СООБЩЕНИЕ</string>
 </resources>

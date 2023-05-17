@@ -54,40 +54,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/task_name" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/start_data_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:weightSum="1.0"
         app:layout_constraintTop_toBottomOf="@+id/task_description"
         tools:ignore="NotSibling"
         tools:layout_editor_absoluteX="16dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/start_date_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="0.8">
-
-            <TextView
-                android:id="@+id/start_date_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/start_data_text"
-                android:textColor="@color/nord_6"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/start_date_text_current"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text=""
-                android:textColor="@color/nord_6"
-                android:textSize="18sp" />
-        </LinearLayout>
+            android:gravity="start"
+            android:text="@string/start_data_text"
+            android:textColor="@color/nord_6"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/start_date_button"
+            app:layout_constraintHorizontal_weight="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/start_date_button"
@@ -95,49 +82,66 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:text="@string/choose_date"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+        <TextView
+            android:id="@+id/start_date_text_current"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text=""
+            android:textColor="@color/nord_6"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/start_date_button"
+            app:layout_constraintHorizontal_weight="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_date_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/end_data_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:weightSum="1.0"
         app:layout_constraintTop_toBottomOf="@id/start_data_layout"
         tools:layout_editor_absoluteX="16dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/end_date_text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="0.8">
-
-            <TextView
-                android:id="@+id/end_date_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/end_data_text"
-                android:textColor="@color/nord_6"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/end_date_text_current"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/nord_6"
-                android:textSize="18sp" />
-
-        </LinearLayout>
+            android:text="@string/end_data_text"
+            android:textColor="@color/nord_6"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_date_button"
+            app:layout_constraintHorizontal_weight="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/end_date_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:text="@string/choose_date" />
-    </LinearLayout>
+            android:text="@string/choose_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/end_date_text_current"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/nord_6"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/end_date_button"
+            app:layout_constraintHorizontal_weight="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/end_date_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tags_textview"
@@ -151,7 +155,7 @@
         app:layout_constraintTop_toBottomOf="@id/end_data_layout" />
 
     <MultiAutoCompleteTextView
-        android:id="@+id/tags_multiautocompletetextview"
+        android:id="@+id/tags"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -173,7 +177,7 @@
         android:textColor="@color/nord_6"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tags_multiautocompletetextview" />
+        app:layout_constraintTop_toBottomOf="@id/tags" />
 
     <LinearLayout
         android:id="@+id/checkbox_"
@@ -206,54 +210,21 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/parent_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox_"
-        tools:layout_editor_absoluteX="16dp">
-
-        <TextView
-            android:id="@+id/selected_time_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="Выбранное время: "
-            android:textColor="@color/nord_6"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/time_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text=""
-            android:textColor="@color/nord_6"
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
     <Button
         android:id="@+id/saveTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@color/nord_14"
+        android:layout_marginTop="50dp"
         android:text="@string/add"
-        android:textColor="@color/nord_6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parent_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_" />
 
     <Button
         android:id="@+id/btnClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/nord_3"
         android:text="@string/clear"
-        android:textColor="@color/nord_6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
