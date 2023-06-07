@@ -51,7 +51,6 @@ class AllTasksFragment : Fragment() {
             object : TaskAdapter.OnEditClickListener {
                 override fun onEditClick(task: Task) {
                     Thread {
-                        // TODO: переделать
                         val foundTask = taskDb.getDao().getTaskByName(task.name)
                         println("Task: $foundTask")
                     }.start()
@@ -66,7 +65,6 @@ class AllTasksFragment : Fragment() {
                 }
             })
 
-
         listItem.adapter = taskAdapter
 
         taskService.getAllTasks().observe(viewLifecycleOwner) { tasks ->
@@ -79,6 +77,19 @@ class AllTasksFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateView()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateView() {
+        taskService.getAllTasks().observe(viewLifecycleOwner) { tasks ->
+            taskAdapter.setTasks(tasks)
+            taskAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun launchNewActivity() {

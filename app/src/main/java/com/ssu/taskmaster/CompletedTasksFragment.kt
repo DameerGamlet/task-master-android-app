@@ -1,7 +1,5 @@
 package com.ssu.taskmaster
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +22,6 @@ class CompletedTasksFragment : Fragment() {
 
     private lateinit var taskService: TaskService
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,11 +60,18 @@ class CompletedTasksFragment : Fragment() {
 
         listItem.adapter = taskAdapter
 
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateCompletedTasksFragment()
+    }
+
+    private fun updateCompletedTasksFragment() {
         taskService.getCompletedTasks().observe(viewLifecycleOwner) { tasks ->
             taskAdapter.setTasks(tasks)
             taskAdapter.notifyDataSetChanged()
         }
-
-        return binding.root
     }
 }
