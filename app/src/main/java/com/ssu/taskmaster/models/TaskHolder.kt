@@ -20,7 +20,7 @@ class TaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(
         task: Task,
         onExecuteClickListener: TaskAdapter.OnExecuteClickListener,
-        onEditClickListener: TaskAdapter.OnEditClickListener,
+        onInfoClickListener: TaskAdapter.OnInfoClickListener,
         onDeleteClickListener: TaskAdapter.OnDeleteClickListener,
     ) {
         taskNameTextView.text = task.name
@@ -34,7 +34,7 @@ class TaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
 
         editButton.setOnClickListener {
-            onEditClickListener.onEditClick(task)
+            onInfoClickListener.onInfoClick(task)
         }
 
         deleteButton.setOnClickListener {

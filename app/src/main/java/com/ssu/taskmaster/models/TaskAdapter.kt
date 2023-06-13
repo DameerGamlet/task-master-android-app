@@ -10,7 +10,7 @@ import com.ssu.taskmaster.R
 class TaskAdapter(
     private val context: Context,
     private val onExecuteClickListener: OnExecuteClickListener,
-    private val onEditClickListener: OnEditClickListener,
+    private val onInfoClickListener: OnInfoClickListener,
     private val onDeleteClickListener: OnDeleteClickListener
 ) : RecyclerView.Adapter<TaskHolder>() {
 
@@ -28,7 +28,7 @@ class TaskAdapter(
         holder.bind(
             task,
             onExecuteClickListener,
-            onEditClickListener,
+            onInfoClickListener,
             onDeleteClickListener
         )
     }
@@ -47,8 +47,8 @@ class TaskAdapter(
         fun onExecuteClick(task: Task)
     }
 
-    interface OnEditClickListener {
-        fun onEditClick(task: Task)
+    interface OnInfoClickListener {
+        fun onInfoClick(task: Task)
     }
 
     interface OnDeleteClickListener {

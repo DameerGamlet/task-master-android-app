@@ -115,8 +115,8 @@
 
         <ImageButton
             android:id="@+id/task_execute"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/image_button_oval"
@@ -124,18 +124,19 @@
 
         <ImageButton
             android:id="@+id/task_edit"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/image_button_oval"
-            app:srcCompat="@drawable/ic_task_edit" />
+            android:scaleType="fitCenter"
+            app:srcCompat="@mipmap/ic_task_info__foreground" />
 
         <ImageButton
             android:id="@+id/task_delete"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:background="@drawable/image_button_oval"

@@ -20,14 +20,6 @@ class MainActivity : AppCompatActivity() {
         tabLayout = findViewById(R.id.tabs)
 
         fragmentInit()
-
-        // Добавляем слушатель изменения вкладок
-        viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                // При переключении на другую вкладку вызываем метод обновления компонентов
-                updateComponents(position)
-            }
-        })
     }
 
     private fun fragmentInit() {
@@ -50,31 +42,5 @@ class MainActivity : AppCompatActivity() {
                 3 -> tab.text = "Настройки"
             }
         }.attach()
-    }
-
-    private fun updateComponents(position: Int) {
-        // Здесь вызывайте методы обновления компонентов в соответствии с текущей вкладкой
-        when (position) {
-            0 -> updateAllTasksFragment()
-            1 -> updateActiveTasksFragment()
-            2 -> updateCompletedTasksFragment()
-            3 -> updateSettingsFragment()
-        }
-    }
-
-    private fun updateAllTasksFragment() {
-        // Обновление компонентов во фрагменте "Все задачи"
-    }
-
-    private fun updateActiveTasksFragment() {
-        // Обновление компонентов во фрагменте "Активные задачи"
-    }
-
-    private fun updateCompletedTasksFragment() {
-        // Обновление компонентов во фрагменте "Завершенные задачи"
-    }
-
-    private fun updateSettingsFragment() {
-        // Обновление компонентов во фрагменте "Настройки"
     }
 }

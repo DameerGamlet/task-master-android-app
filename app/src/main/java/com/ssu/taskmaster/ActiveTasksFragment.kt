@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ssu.taskmaster.components.dialogs.TaskInfoDialogFragment
 import com.ssu.taskmaster.databinding.FragmentActiveTasksBinding
 import com.ssu.taskmaster.db.TaskHelperDb
 import com.ssu.taskmaster.models.Task
 import com.ssu.taskmaster.models.TaskAdapter
 import com.ssu.taskmaster.service.TaskService
 
-class ActiveTasksFragment : Fragment() {
+class ActiveTasksFragment : Fragment(), TaskAdapter.OnInfoClickListener {
 
     private lateinit var binding: FragmentActiveTasksBinding
 
@@ -43,22 +44,14 @@ class ActiveTasksFragment : Fragment() {
                     taskService.updateTaskCompletionStatus(task, !task.isCompleted)
                 }
             },
-            object : TaskAdapter.OnEditClickListener {
-                override fun onEditClick(task: Task) {
-                    Thread {
-                        // TODO: переделать
-                        val foundTask = taskDb.getDao().getTaskByName(task.name)
-                        println("Task: $foundTask")
-                    }.start()
-                }
-
-            },
+            this,
             object : TaskAdapter.OnDeleteClickListener {
                 override fun onDeleteClick(task: Task) {
-                    taskService.deleteTask(task)
+                    Thread {
+                        taskDb.getDao().deleteTask(task)
+                    }.start()
                 }
             })
-
         listItem.adapter = taskAdapter
 
         taskService.getActiveTasks().observe(viewLifecycleOwner) { tasks ->
@@ -71,6 +64,17 @@ class ActiveTasksFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onInfoClick(task: Task) {
+        val taskDb = TaskHelperDb.getConnect(requireActivity())
+        Thread {
+            val foundTask = taskDb.getDao().getTaskByName(task.name)
+            activity?.runOnUiThread {
+                foundTask?.let { TaskInfoDialogFragment(it) }
+                    ?.show(childFragmentManager, "task_info_dialog")
+            }
+        }.start()
     }
 
     override fun onResume() {

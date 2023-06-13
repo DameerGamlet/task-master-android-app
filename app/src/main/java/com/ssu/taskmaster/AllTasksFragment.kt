@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ssu.taskmaster.components.dialogs.TaskInfoDialogFragment
 import com.ssu.taskmaster.databinding.FragmentAllTasksBinding
 import com.ssu.taskmaster.db.TaskHelperDb
 import com.ssu.taskmaster.models.Task
 import com.ssu.taskmaster.models.TaskAdapter
 import com.ssu.taskmaster.service.TaskService
 
-class AllTasksFragment : Fragment() {
+class AllTasksFragment : Fragment(), TaskAdapter.OnInfoClickListener {
 
     private lateinit var binding: FragmentAllTasksBinding
 
@@ -48,15 +49,7 @@ class AllTasksFragment : Fragment() {
                     }.start()
                 }
             },
-            object : TaskAdapter.OnEditClickListener {
-                override fun onEditClick(task: Task) {
-                    Thread {
-                        val foundTask = taskDb.getDao().getTaskByName(task.name)
-                        println("Task: $foundTask")
-                    }.start()
-                }
-
-            },
+            this, // Пробросим текущий фрагмент в качестве слушателя информации
             object : TaskAdapter.OnDeleteClickListener {
                 override fun onDeleteClick(task: Task) {
                     Thread {
@@ -77,6 +70,17 @@ class AllTasksFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onInfoClick(task: Task) {
+        val taskDb = TaskHelperDb.getConnect(requireActivity())
+        Thread {
+            val foundTask = taskDb.getDao().getTaskByName(task.name)
+            activity?.runOnUiThread {
+                foundTask?.let { TaskInfoDialogFragment(it) }
+                    ?.show(childFragmentManager, "task_info_dialog")
+            }
+        }.start()
     }
 
     override fun onResume() {
